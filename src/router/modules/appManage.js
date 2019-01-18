@@ -23,10 +23,16 @@ const appManageRouter = {
       meta: { title: 'gatedLaunch' }
     },
     {
-      path: 'appUpload',
-      component: () => import('@/views/appmanage/upload/APPUpload'),
-      name: 'AppUpload',
-      meta: { title: 'appUpload' }
+      path: 'appDetail',
+      component: () => import('@/views/appmanage/AppDetail'),
+      name: 'AppDetail',
+      meta: { title: 'appDetail' }
+    },
+    {
+      path: 'channelMgr',
+      component: () => import('@/views/appmanage/channelMgr'),
+      name: 'ChannelMgr',
+      meta: { title: 'channelMgr' }
     }
   ]
 }

@@ -52,6 +52,8 @@ export default {
     customStyles: '自定义样式',
     gatedLaunch: '灰度发布条件',
     appUpload: '应用上传',
+    appDetail: '应用详情',
+    channelMgr: '渠道管理',
     tab: 'Tab',
     form: '表单',
     createArticle: '创建文章',
