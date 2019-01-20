@@ -1,117 +1,133 @@
 <template>
   <div class="app-container">
-    <div class="filter-container">
-      <el-form ref="appForm" v-model="appForm">
-        <el-form-item>
-          <el-input v-model="appForm.appName" class="filter-item" style="width: 20%;" placeholder="应用名称"/>
-          <el-input v-model="appForm.bundleId" class="filter-item" style="width: 20%;" placeholder="应用包名"/>
-          <el-select v-model="appForm.typeValue" placeholder="应用类型" clearable style="width: 15%" class="filter-item">
-            <el-option v-for="item in appForm.typeOptions" :key="item.value" :label="item.label" :value="item.value" />
-          </el-select>
-          <el-select v-model="appForm.teamName" placeholder="团队名称" clearable style="width: 20%" class="filter-item">
-            <el-option v-for="item in appForm.teamNameOpts" :key="item.value" :label="item.label" :value="item.value" />
-          </el-select>
-        </el-form-item>
-        <el-form-item>
-          <el-input class="filter-item" style="width: 20%;" placeholder="应用上传人"/>
-          <el-date-picker v-model="appForm.dateRg" class="filter-item-datepick" type="daterange" start-placeholde="开始日期" end-placeholde="结束日期" unlink-panels format="yyyy-MM-dd"/>
-          <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" >搜索</el-button>
-          <el-button v-waves class="filter-item" type="primary" icon="el-icon-refresh" @click="resetForm('appForm')">重置</el-button>
-        </el-form-item>
-      </el-form>
-    </div>
-    <el-table
-      border
-      fit
-      highlight-current-row
-      style="width: 100%;">
-      <el-table-column><span/></el-table-column>
-      <el-table-column><span/></el-table-column>
-      <el-table-column><span/></el-table-column>
-      <el-table-column><span/></el-table-column>
-      <el-table-column><span/></el-table-column>
-      <el-table-column><span/></el-table-column>
-    </el-table>
-    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
+    <TempFormTable
+      :pageDef="pageDef" 
+      :formData="formData" 
+      :entity="entity" 
+      @hostImport="hostImport"
+      @doAdd="doAdd" 
+      @doEdit="doEdit" 
+      @doDelete="doDelete"  
+      @doReset="doReset"
+      @pageQuery="doPageQuery"
+    ></TempFormTable>
   </div>
 </template>
 
 <script>
-import waves from '@/directive/waves' // Waves directive
-// import { parseTime } from '@/utils'
-import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
-export default {
-  name: 'AppDetail',
-  components: { Pagination },
-  directives: { waves },
-  data() {
-    return {
-      appForm: {
-        typeValue: '',
-        teamName: '',
-        teamNameOpts: [],
-        dateRg: '',
-        typeOptions: [{
-          value: 0,
-          label: 'Windows版'
-        }, {
-          value: 1,
-          label: 'Android版'
-        }, {
-          value: 2,
-          label: 'iOS企业版'
-        }, {
-          value: 3,
-          label: 'iOS应用商店版'
-        }]
+  import TempFormTable from '@/components/Templates/TempForm/TempFormTable'
+
+  export default {
+    components: { TempFormTable },
+    data() {
+      return {
+        listQuery: {},
+        importVisible: false,
+        entity: {},
+        formData:{},
+        pageDef: {
+          query:{
+            useForQuery:true,
+            name:'appsQuery',
+            pageCols: [
+              { label: '主机组名称', inputType: 'input', modelName: 'groupName',disabled:false },
+              { label: '子组名称', inputType: 'input', modelName: 'subGroupName',disabled:false },
+              { label: '带管地址', inputType: 'input', modelName: 'ipAddress',disabled:false },
+              { label: '纳管状态', inputType: 'select', modelName: 'manageStatus',enumType: 'manageStatus',disabled:false }
+            ]
+          },
+          tabDef: {
+            // isSelect: true, // 是否可以多选
+            isIndex: true, // 是否有序号
+            // 表格字段定义
+            tabCols: [
+              { label: '主机名称', prop: 'hostName'},
+              { label: '带管地址', prop: 'ipAddress'},
+              { label: '主机组名称', prop: 'groupName'},
+              { label: '子组名称', prop: 'subGroupName'},
+              { label: '纳管状态', prop: 'manageStatus', isFormat: true,enumType: 'manageStatus'},
+              { label: '在线状态', prop: 'onlineStatus', isFormat: true,enumType: 'onlineStatus'}
+            ]
+          },
+          rowButtons: [
+            { id:"hostMngEdit", label: '编辑', funcName: 'doEdit'},
+            { id:"hostMngDelete", label: '删除', funcName: 'doDelete'}
+          ],
+          buttons: [
+            { id:"hostMngAdd", label: '新增', funcName: 'doAdd', disabled: false},
+            { id:"hostMngDownloadFile", label: '模板下载', funcName: 'doAdd', disabled: false},
+            { id:"hostMngImport", label: '导入', funcName: 'hostImport', disabled: false}
+          ]
+        }
+      }
+    },
+    methods: {
+      doReset(){
+        this.formData={}
       },
-      total: 10,
-      listLoading: true,
-      listQuery: {
-        page: 1,
-        limit: 20,
-        importance: undefined,
-        title: undefined,
-        type: undefined,
-        sort: '+id'
+      importFile(){},
+      hostImport(){
+        this.importVisible=true
+      },
+      doAdd() {
+        this.$router.push({
+          name: 'hostMngAdd',
+          params: {
+            disabled: false,
+            ifEdit: false
+          }
+        })
+      },
+      doEdit(row) {
+        this.$router.push({
+          name: 'hostMngAdd',
+          params: {
+            hostInf: row,
+            disabled: false,
+            ifEdit: true
+          }
+        })
+      },
+      doDelete(row, listQuery) {
+        this.$confirm('此操作将永久该条记录, 是否继续?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning',
+            center: true
+          }).then(() => {
+            hostDelete(row).then(response => {
+              this.$message({
+                message: '删除成功',
+                type: 'success'
+              })
+              this.doPageQuery(this.listQuery)
+            })
+          }).catch(() => {
+            this.$message({
+              type: 'info',
+              message: '已取消删除'
+            });
+          });
+      },
+      doPageQuery(listQuery) {
+        var param = this.formData
+        this.listQuery = listQuery
+        extend(param, this.listQuery)
+        this.entity = {
+          totalRec: 1, 
+          totalPage: 1, 
+          currPage: 1, 
+          currRec: 20, 
+          data: [{hostName:'testHostOne',ipAddress:'1.1.1.1',groupName:'tsetHostGrpOne',subGroupName:'testChdGrpOne',manageStatus:'1',onlineStatus:'1'}]
+        }
+        // hostPageQuery(this.listQuery).then(response => {
+        //   this.entity = response
+        // })
       }
     }
-  },
-  created() {
-    this.getList()
-  },
-  methods: {
-    resetForm(formName) {
-      this.$refs[formName].resetFields()
-    },
-    getList() {
-      this.listLoading = true
-      fetchList(this.listQuery).then(response => {
-        this.list = response.data.items
-        this.total = response.data.total
-
-        // Just to simulate the time of the request
-        setTimeout(() => {
-          this.listLoading = false
-        }, 1.5 * 1000)
-      })
-    },
-    handleFilter() {
-      this.listQuery.page = 1
-      this.getList()
-    }
   }
-}
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-  .app-container{
-    .filter-container{
-      .filter-item-datepick{
-        // display: inline-block;
-        vertical-align: middle;
-        margin-bottom: 10px;
-      }
-    }
-  }
+
 </style>
