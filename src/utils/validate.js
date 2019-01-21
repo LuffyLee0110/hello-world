@@ -40,3 +40,45 @@ export function validateEmail(email) {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   return re.test(email)
 }
+
+/*判断对象是否非空*/
+export function isEmpty(obj) {
+  if (obj === undefined) {
+    return true
+  } else {
+    if (typeof(obj) === "object") {
+      for (var key in obj) {
+        return false
+      }
+      return true
+    } else {
+      return true
+    }
+  }
+}
+
+/**
+ * 对象合并,覆盖已有属性
+ * @param copyObj
+ * @param fromObj
+ */
+export function extend(copyObj, fromObj) {
+  if (typeof(copyObj) === "object" && typeof(fromObj) === "object") {
+    for (var p in fromObj) {
+      if (fromObj.hasOwnProperty(p))
+        copyObj[p] = fromObj[p];
+    }
+  }
+
+}
+
+export function compareDate(d1,d2){
+  if(d1 != null && d1 != undefined && d2 != null && d2 != undefined
+  && d1 instanceof Date && d2 instanceof Date){
+    if(d1 > d2){
+      return true;
+    }else{
+      return false;
+    }
+  }
+}
