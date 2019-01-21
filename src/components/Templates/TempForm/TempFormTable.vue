@@ -610,6 +610,7 @@ export default {
 }
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
+
 .el-main {
   background-color: #409eff;
   text-align: center;
@@ -620,23 +621,23 @@ export default {
   margin-right: 20px;
 }
 
-/*.toolBar {*/
-/*margin: 0 0 0 44px !important;*/
-/*.toolBar-btn {*/
-/*margin: 24px 0 24px 0px;*/
-/*float: left;*/
-/*}*/
-/*.toolBar-cond {*/
-/*float: right;*/
-/*margin: 28px 44px 0 0;*/
-/*}*/
+.toolBar {
+  margin: 0 0 0 44px !important;
+  .toolBar-btn {
+  margin: 24px 0 24px 0px;
+  float: left;
+  }
+  .toolBar-cond {
+  float: right;
+  margin: 28px 44px 0 0;
+  }
 
-/*}*/
+}
 
-/*.singleTable {*/
-/*height: 50%;*/
-/*padding: 0 44px 0 44px;*/
-/*}*/
+.singleTable {
+height: 50%;
+padding: 0 44px 0 44px;
+}
 
 .el-input {
   width: 100%;
@@ -674,9 +675,9 @@ export default {
 /*font: 18px "Microsoft Yahei";*/
 /*}*/
 
-/*.el-pagination{*/
-/*text-align: center;*/
-/*}*/
+.el-pagination{
+  text-align: center;
+}
 
 /*.pagination-container{*/
 /*padding-top: 76px;*/

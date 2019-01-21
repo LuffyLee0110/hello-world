@@ -207,10 +207,10 @@ export default {
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
 
-/*.bottomBtn {*/
-  /*margin-top: 40px;*/
-  /*margin-bottom: 40px;*/
-/*}*/
+// .bottomBtn {
+//   margin-top: 40px;
+//   margin-bottom: 40px;
+// }
 .queryBottom {
   //width: 50%;
   //margin:0px 0px 0px 745px;

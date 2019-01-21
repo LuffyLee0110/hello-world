@@ -1,17 +1,15 @@
 <template>
-  <div class="app-container">
-    <TempFormTable
-      :pageDef="pageDef" 
-      :formData="formData" 
-      :entity="entity" 
-      @hostImport="hostImport"
-      @doAdd="doAdd" 
-      @doEdit="doEdit" 
-      @doDelete="doDelete"  
-      @doReset="doReset"
-      @pageQuery="doPageQuery"
-    ></TempFormTable>
-  </div>
+  <TempFormTable
+    :pageDef="pageDef" 
+    :formData="formData" 
+    :entity="entity" 
+    @hostImport="hostImport"
+    @doAdd="doAdd" 
+    @doEdit="doEdit" 
+    @doDelete="doDelete"  
+    @doReset="doReset"
+    @pageQuery="doPageQuery"
+  ></TempFormTable>
 </template>
 
 <script>
