@@ -87,6 +87,17 @@ export default  {
             copyObj[p] = fromObj[p];
         }
       }
+    },
+
+    compareDate(d1,d2){
+      if(d1 != null && d1 != undefined && d2 != null && d2 != undefined
+      && d1 instanceof Date && d2 instanceof Date){
+        if(d1 > d2){
+          return true;
+        }else{
+          return false;
+        }
+      }
     }
   }
   

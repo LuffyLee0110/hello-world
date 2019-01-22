@@ -56,29 +56,3 @@ export function isEmpty(obj) {
     }
   }
 }
-
-/**
- * 对象合并,覆盖已有属性
- * @param copyObj
- * @param fromObj
- */
-export function extend(copyObj, fromObj) {
-  if (typeof(copyObj) === "object" && typeof(fromObj) === "object") {
-    for (var p in fromObj) {
-      if (fromObj.hasOwnProperty(p))
-        copyObj[p] = fromObj[p];
-    }
-  }
-
-}
-
-export function compareDate(d1,d2){
-  if(d1 != null && d1 != undefined && d2 != null && d2 != undefined
-  && d1 instanceof Date && d2 instanceof Date){
-    if(d1 > d2){
-      return true;
-    }else{
-      return false;
-    }
-  }
-}

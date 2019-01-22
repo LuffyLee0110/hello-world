@@ -14,6 +14,7 @@
 
 <script>
   import TempFormTable from '@/components/Templates/TempForm/TempFormTable'
+  import commonUtil from '@/utils/commonUtil'
 
   export default {
     components: { TempFormTable },
@@ -28,10 +29,12 @@
             useForQuery:true,
             name:'appsQuery',
             pageCols: [
-              { label: '主机组名称', inputType: 'input', modelName: 'groupName',disabled:false },
-              { label: '子组名称', inputType: 'input', modelName: 'subGroupName',disabled:false },
-              { label: '带管地址', inputType: 'input', modelName: 'ipAddress',disabled:false },
-              { label: '纳管状态', inputType: 'select', modelName: 'manageStatus',enumType: 'manageStatus',disabled:false }
+              { label: '应用名称', inputType: 'input', modelName: 'appName',disabled:false },
+              { label: '应用类型', inputType: 'select', modelName: 'appType',enumType: 'appType',disabled:false },
+              { label: '应用包名', inputType: 'input', modelName: 'bundleId',disabled:false },
+              { label: '团队名称', inputType: 'select', modelName: 'teamName',disabled:false },
+              { label: '应用上传人', inputType: 'input', modelName: 'creator',disabled:false },
+              { label: '日期范围', inputType: 'daterange', modelName: 'dateRng',disabled:false }
             ]
           },
           tabDef: {
@@ -39,12 +42,14 @@
             isIndex: true, // 是否有序号
             // 表格字段定义
             tabCols: [
-              { label: '主机名称', prop: 'hostName'},
-              { label: '带管地址', prop: 'ipAddress'},
-              { label: '主机组名称', prop: 'groupName'},
-              { label: '子组名称', prop: 'subGroupName'},
-              { label: '纳管状态', prop: 'manageStatus', isFormat: true,enumType: 'manageStatus'},
-              { label: '在线状态', prop: 'onlineStatus', isFormat: true,enumType: 'onlineStatus'}
+              { label: '名称', prop: 'appName'},
+              { label: '类型', prop: 'appType', isFormat: true,enumType: 'appType'},
+              { label: '包名', prop: 'bundleId'},
+              { label: '当前版本', prop: 'curVer'},
+              { label: '所属团队', prop: 'teamName'},
+              { label: '短链接', prop: 'shortUrl'},
+              { label: '上传人', prop: 'creator'},
+              { label: '上传时间', prop: 'addTime'}
             ]
           },
           rowButtons: [
@@ -52,9 +57,7 @@
             { id:"hostMngDelete", label: '删除', funcName: 'doDelete'}
           ],
           buttons: [
-            { id:"hostMngAdd", label: '新增', funcName: 'doAdd', disabled: false},
-            { id:"hostMngDownloadFile", label: '模板下载', funcName: 'doAdd', disabled: false},
-            { id:"hostMngImport", label: '导入', funcName: 'hostImport', disabled: false}
+            { id:"hostMngAdd", label: '新增', funcName: 'doAdd', disabled: false}
           ]
         }
       }
@@ -110,13 +113,13 @@
       doPageQuery(listQuery) {
         var param = this.formData
         this.listQuery = listQuery
-        extend(param, this.listQuery)
+        commonUtil.extend(param, this.listQuery)
         this.entity = {
           totalRec: 1, 
           totalPage: 1, 
           currPage: 1, 
           currRec: 20, 
-          data: [{hostName:'testHostOne',ipAddress:'1.1.1.1',groupName:'tsetHostGrpOne',subGroupName:'testChdGrpOne',manageStatus:'1',onlineStatus:'1'}]
+          data: [{appName:'建行员工',appType:'1', bundleId:'com.ccb.ecpmobile.ecp',curVer:'1.5.0.0',teamName:'建设银行',shortUrl:'jhyg',creator:'admin',addTime:'2018-12-10 15:30:32'}]
         }
         // hostPageQuery(this.listQuery).then(response => {
         //   this.entity = response

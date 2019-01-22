@@ -37,7 +37,6 @@
 </template>
 <script>
 import { getEnumObj } from "@/utils/formatter"
-import { extend } from "@/utils/validate"
 import TempFormColumn from "@/components/Templates/TempForm/TempFormColumn"
 
 export default {
@@ -231,14 +230,14 @@ export default {
 }
 
 .temp-form-page{
-  margin: 0 0 0 0;
+  margin: 0 0 15px 0;
 }
 
 .form-group{
   background-color: #ffffff;
-  margin-top: 16px;
-  padding-top: 40px;
-  padding-bottom: 20px;
+  margin-top: 1px;
+  padding-top: 4px;
+  padding-bottom: 2px;
 }
 
 </style>

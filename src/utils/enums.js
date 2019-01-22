@@ -18,6 +18,12 @@ const enums = {
     },
     flagType: {
       '1': '基础软件安装'
+    },
+    appType: {
+      '0': 'Windows版',
+      '1': 'Android版',
+      '2': 'iOS企业版',
+      '3': 'iOS应用商店版',
     }
   }
   

@@ -34,6 +34,12 @@
         </el-date-picker>
       </el-form-item>
     </template>
+    <template v-else-if="col.inputType==='daterange'">
+      <el-form-item :label="col.label" :prop="col.modelName">
+        <el-date-picker v-model="form[col.modelName]" type="daterange" value-format="yyyyMMdd"  start-placeholde="开始日期" end-placeholde="结束日期" unlink-panels :disabled="disabled || col.disabled" @change="change">
+        </el-date-picker>
+      </el-form-item>
+    </template>
     <template v-else-if="col.inputType==='refType'">
       <slot :name="col.modelName"></slot>
     </template>
@@ -124,8 +130,12 @@ export default {
   }
 }
 </script>
-<style>
+<style rel="stylesheet/scss" lang="scss" scoped>
 .el-autocomplete {
   width: 100%;
+}
+
+.el-form-item {
+  margin-bottom: 10px;
 }
 </style>

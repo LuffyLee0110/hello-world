@@ -37,7 +37,7 @@
         </template>
         <el-table-column v-if="pageDef.tabDef.isSelect" type="selection" width="55" header-align="center" align="center">
         </el-table-column>
-        <el-table-column v-if="pageDef.tabDef.isIndex" label="序号" type="index" width="60" header-align="center" align="center">
+        <el-table-column v-if="pageDef.tabDef.isIndex" label="序号" type="index" width="50" header-align="center" align="center">
           <template slot-scope="scope">
             {{(listQuery.pageJump-1)*listQuery.recInPage+scope.$index+1}}
           </template>
@@ -123,7 +123,7 @@
 </template>
 <script>
 import { formatter, getEnumObj } from '@/utils/formatter'
-import { extend } from '@/utils/validate'
+// import { extend } from '@/utils/validate'
 import commonUtil from '@/utils/commonUtil'
 import TempTableColumn from '@/components/Templates/TempTable/TempTableColumn'
 import TempFormColumn from "@/components/Templates/TempForm/TempFormColumn"
@@ -424,12 +424,12 @@ export default {
 
     // 子组件按钮事件
     doClick(funcName) {
-      extend(this.form, this.listQuery)
+      commonUtil.extend(this.form, this.listQuery)
       this.$emit(funcName, this.selection, this.form)
     },
 
     doRowClick(funcName, index, row) {
-      extend(this.form, this.listQuery)
+      commonUtil.extend(this.form, this.listQuery)
       this.$emit(funcName, row, this.form, index)
     },
     // 带查询条件的查询
@@ -465,7 +465,7 @@ export default {
       // } else {
       //   queryParam[this.form.queryName] = queryValue
       // }
-      extend(queryParam, this.listQuery);
+      commonUtil.extend(queryParam, this.listQuery);
       // let qParam = {
       //   'queryName': this.form.queryName,
       //   'queryValue': this.form.queryValue
@@ -622,9 +622,9 @@ export default {
 }
 
 .toolBar {
-  margin: 0 0 0 44px !important;
+  margin: 0 0 0 14px !important;
   .toolBar-btn {
-  margin: 24px 0 24px 0px;
+  margin: 30px 0 8px 0px;
   float: left;
   }
   .toolBar-cond {
@@ -636,7 +636,7 @@ export default {
 
 .singleTable {
 height: 50%;
-padding: 0 44px 0 44px;
+padding: 0 14px 0 14px;
 }
 
 .el-input {
@@ -712,5 +712,9 @@ padding: 0 44px 0 44px;
   margin-top: 16px;
   padding-top: 40px;
   padding-bottom: 20px;
+}
+
+.toolQuery {
+  border-bottom: #ebeef5 solid 1px;
 }
 </style>
