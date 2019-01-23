@@ -119,7 +119,7 @@
           totalPage: 1, 
           currPage: 1, 
           currRec: 20, 
-          data: [{appName:{name:'建行员工',icon:'sf.png',type:'456'},appType:'1', bundleId:'com.ccb.ecpmobile.ecp',curVer:'1.5.0.0',teamName:'建设银行',shortUrl:'jhyg',creator:'admin',addTime:'2018-12-10 15:30:32'}]
+          data: [{appName:{name:'建行员工',icon:'sf.png',appType:'1'},appType:'1', bundleId:'com.ccb.ecpmobile.ecp',curVer:'1.5.0.0',teamName:'建设银行',shortUrl:'jhyg',creator:'admin',addTime:'2018-12-10 15:30:32'}]
           // data: [{appName:'建行员工',appType:'1', bundleId:'com.ccb.ecpmobile.ecp',curVer:'1.5.0.0',teamName:'建设银行',shortUrl:'jhyg',creator:'admin',addTime:'2018-12-10 15:30:32'}]
         }
         // hostPageQuery(this.listQuery).then(response => {

@@ -608,9 +608,11 @@ export default {
     appNameFormat(row,column,cellValue) {
       if(cellValue !== '' && cellValue !== undefined) {
         let fval = ''
-        fval += '<div class="app-icon"><span><img alt="" class= "appicon_list" src=/src/assets/icon/' + cellValue.icon + '></sapn></div>'
+        fval += '<div class="app-icon"><span><img alt="" '+
+                    'style="width:30px;height:30px;float:left !important;border-radius:50%;" '+ 
+                    'src=/src/assets/icon/' + cellValue.icon + '></sapn></div>'
         fval += '<div class="app-info">' + cellValue.name + '</div>'
-        fval += '<span>' + cellValue.type + '</span>'
+        fval += '<span>' + cellValue.appType + '</span>'
 
         return fval
       } else {
@@ -740,10 +742,4 @@ padding: 0 14px 0 14px;
   border-bottom: #ebeef5 solid 1px;
 }
 
-.el-tabel td div .appicon_list {
-  width: 30px;
-  height: 30px;
-  float: left !important;
-  border-radius: 50%;
-}
 </style>
