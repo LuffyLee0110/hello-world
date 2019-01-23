@@ -72,6 +72,15 @@
               </template>
             </el-table-column>
           </template>
+          <template v-else-if="tabCol.isAppName">
+            <el-table-column :label="tabCol.label" :prop="tabCol.prop" :sortable="tabCol.isSort" :formatter="appNameFormat" :width="tabCol.width" header-align="center" align="center">
+              <template slot-scope="scope">
+                <div v-html="appNameFormat(scope.row,scope.column,scope.row[tabCol.prop])">
+                  {{appNameFormat(scope.row,scope.column,scope.row[tabCol.prop])}}
+                </div>
+              </template>
+            </el-table-column>
+          </template>
           <template v-else-if="tabCol.isImgButton">
             <el-table-column :label="tabCol.label" :prop="tabCol.prop" :sortable="tabCol.isSort" :width="135" header-align="center" align="center">
               <template slot-scope="scope">
@@ -595,6 +604,19 @@ export default {
         return cellValue
       }
     },
+
+    appNameFormat(row,column,cellValue) {
+      if(cellValue !== '' && cellValue !== undefined) {
+        let fval = ''
+        fval += '<div class="app-icon"><span><img alt="" class= "appicon_list" src=/src/assets/icon/' + cellValue.icon + '></sapn></div>'
+        fval += '<div class="app-info">' + cellValue.name + '</div>'
+        fval += '<span>' + cellValue.type + '</span>'
+
+        return fval
+      } else {
+        return cellValue
+      }
+    },
     getPreviewPathFirstOnly(jsonstr){
       try {
         var items = JSON.parse(jsonstr);
@@ -609,7 +631,7 @@ export default {
   }
 }
 </script>
-<style rel="stylesheet/scss" lang="scss" scoped>
+<style rel="stylesheet/scss" lang="scss" >
 
 .el-main {
   background-color: #409eff;
@@ -716,5 +738,12 @@ padding: 0 14px 0 14px;
 
 .toolQuery {
   border-bottom: #ebeef5 solid 1px;
+}
+
+.el-tabel td div .appicon_list {
+  width: 30px;
+  height: 30px;
+  float: left !important;
+  border-radius: 50%;
 }
 </style>

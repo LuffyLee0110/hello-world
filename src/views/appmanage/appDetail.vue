@@ -42,7 +42,7 @@
             isIndex: true, // 是否有序号
             // 表格字段定义
             tabCols: [
-              { label: '名称', prop: 'appName'},
+              { label: '名称', prop: 'appName',isAppName:true, enumType:'appType'},
               { label: '类型', prop: 'appType', isFormat: true,enumType: 'appType'},
               { label: '包名', prop: 'bundleId'},
               { label: '当前版本', prop: 'curVer'},
@@ -119,15 +119,31 @@
           totalPage: 1, 
           currPage: 1, 
           currRec: 20, 
-          data: [{appName:'建行员工',appType:'1', bundleId:'com.ccb.ecpmobile.ecp',curVer:'1.5.0.0',teamName:'建设银行',shortUrl:'jhyg',creator:'admin',addTime:'2018-12-10 15:30:32'}]
+          data: [{appName:{name:'建行员工',icon:'sf.png',type:'456'},appType:'1', bundleId:'com.ccb.ecpmobile.ecp',curVer:'1.5.0.0',teamName:'建设银行',shortUrl:'jhyg',creator:'admin',addTime:'2018-12-10 15:30:32'}]
+          // data: [{appName:'建行员工',appType:'1', bundleId:'com.ccb.ecpmobile.ecp',curVer:'1.5.0.0',teamName:'建设银行',shortUrl:'jhyg',creator:'admin',addTime:'2018-12-10 15:30:32'}]
         }
         // hostPageQuery(this.listQuery).then(response => {
         //   this.entity = response
         // })
+      },
+      customFormat1(row, column, cellValue) {
+      if (cellValue !== '' && cellValue !== undefined) {
+          let fval = ''
+          this.$emit('customFormat', row, column, cellValue, function(val) {
+            fval = val
+          })
+          return fval
+        } else {
+          // return cellValue
+          var str=""
+          str += "<span>"+cellValue.appName.name +"</span>"
+          console.log(str)
+          return str
+        }
       }
     }
   }
-</script>
+</script>  
 
 <style rel="stylesheet/scss" lang="scss" scoped>
 
