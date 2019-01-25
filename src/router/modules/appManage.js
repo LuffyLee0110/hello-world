@@ -33,6 +33,13 @@ const appManageRouter = {
       component: () => import('@/views/appmanage/channelMgr'),
       name: 'ChannelMgr',
       meta: { title: 'channelMgr' }
+    },
+    {
+      path: 'appNew',
+      component: () => import('@/views/appmanage/appNew'),
+      name: 'AppNew',
+      meta: { title: 'appNew' },
+      hidden: true
     }
   ]
 }

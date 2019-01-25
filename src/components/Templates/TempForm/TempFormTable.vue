@@ -608,11 +608,17 @@ export default {
     appNameFormat(row,column,cellValue) {
       if(cellValue !== '' && cellValue !== undefined) {
         let fval = ''
+        let aType = {
+          '0': 'Windows版',
+          '1': 'Android版',
+          '2': 'iOS企业版',
+          '3': 'iOS应用商店版',
+        }
         fval += '<div class="app-icon"><span><img alt="" '+
-                    'style="width:30px;height:30px;float:left !important;border-radius:50%;" '+ 
-                    'src=/src/assets/icon/' + cellValue.icon + '></sapn></div>'
+                    'style="width:40px;height:40px;float:left !important;border-radius:50%;" '+ 
+                    'src="' + cellValue.icon + '"></sapn></div>'
         fval += '<div class="app-info">' + cellValue.name + '</div>'
-        fval += '<span>' + cellValue.appType + '</span>'
+        fval += '<span style="color:#9e9e9e;">' + aType[cellValue.appType] + '</span>'
 
         return fval
       } else {

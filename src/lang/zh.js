@@ -53,6 +53,7 @@ export default {
     gatedLaunch: '灰度发布条件',
     appUpload: '应用上传',
     appDetail: '应用详情',
+    appNew: '新增应用',
     channelMgr: '渠道管理',
     tab: 'Tab',
     form: '表单',

@@ -4,7 +4,7 @@
     :formData="formData" 
     :entity="entity" 
     @hostImport="hostImport"
-    @doAdd="doAdd" 
+    @doAddApp="doAddApp" 
     @doEdit="doEdit" 
     @doDelete="doDelete"  
     @doReset="doReset"
@@ -42,9 +42,9 @@
             isIndex: true, // 是否有序号
             // 表格字段定义
             tabCols: [
-              { label: '名称', prop: 'appName',isAppName:true, enumType:'appType'},
-              { label: '类型', prop: 'appType', isFormat: true,enumType: 'appType'},
-              { label: '包名', prop: 'bundleId'},
+              { label: '名称', prop: 'appName',isAppName:true},
+              // { label: '类型', prop: 'appType', isFormat: true,enumType: 'appType'},
+              // { label: '包名', prop: 'bundleId'},
               { label: '当前版本', prop: 'curVer'},
               { label: '所属团队', prop: 'teamName'},
               { label: '短链接', prop: 'shortUrl'},
@@ -57,22 +57,24 @@
             { id:"hostMngDelete", label: '删除', funcName: 'doDelete'}
           ],
           buttons: [
-            { id:"hostMngAdd", label: '新增', funcName: 'doAdd', disabled: false}
+            { id:"appNew", label: '新增', funcName: 'doAddApp', disabled: false}
           ]
         }
       }
     },
     methods: {
       doReset(){
+        console.log('rest')
         this.formData={}
       },
       importFile(){},
       hostImport(){
         this.importVisible=true
       },
-      doAdd() {
+      doAddApp() {
+        console.log('adb')
         this.$router.push({
-          name: 'hostMngAdd',
+          name: 'AppNew',
           params: {
             disabled: false,
             ifEdit: false
@@ -119,7 +121,7 @@
           totalPage: 1, 
           currPage: 1, 
           currRec: 20, 
-          data: [{appName:{name:'建行员工',icon:'sf.png',appType:'1'},appType:'1', bundleId:'com.ccb.ecpmobile.ecp',curVer:'1.5.0.0',teamName:'建设银行',shortUrl:'jhyg',creator:'admin',addTime:'2018-12-10 15:30:32'}]
+          data: [{appName:{name:'建行员工',icon:'/src/assets/icon/sf.png',appType:'1'},appType:'1', bundleId:'com.ccb.ecpmobile.ecp',curVer:'1.5.0.0',teamName:'建设银行',shortUrl:'jhyg',creator:'admin',addTime:'2018-12-10 15:30:32'}]
           // data: [{appName:'建行员工',appType:'1', bundleId:'com.ccb.ecpmobile.ecp',curVer:'1.5.0.0',teamName:'建设银行',shortUrl:'jhyg',creator:'admin',addTime:'2018-12-10 15:30:32'}]
         }
         // hostPageQuery(this.listQuery).then(response => {
