@@ -8,6 +8,7 @@
     </el-row>
 
     <!-- 列表按钮 -->
+    <!-- 
     <el-row class="toolBar" v-if="!pageDef.disableQuery">
       <div v-if="pageDef.showTitle" style="margin-top:20px">{{pageDef.title}}</div>
       <div class="toolBar-btn">
@@ -16,6 +17,28 @@
           <i v-if="button.icon" :class="button.icon+' el-icon--right'"></i>
         </el-button>
         <slot  name="toolBar"></slot>
+      </div>
+    </el-row>
+    -->
+    <el-row class="toolBar" v-if="!pageDef.disableQuery">
+      <div v-if="pageDef.showTitle" style="margin-top:20px;">{{pageDef.title}}</div>
+      <div class="toolBar-btn">
+        <template v-for="button,index in pageDef.buttons">
+          <template v-if="button.isDialog">
+            <el-button :id="button.id" type="primary" @click="doClick(button.funcName)" size="normal" :disabled="buttonStates[index]" :key="index">
+              {{button.label}}
+              <i v-if="button.icon" :class="button.icon+' el-icon--right'"></i>
+            </el-button>
+            <TempAppAddDialog :pageDef="pageDef" :buttonDef="button" @doDiaSave="doDiaSave" @doDiaCancel="doDiaCancel" :visible.sync="button.dialogVisible"></TempAppAddDialog>
+          </template>
+          <template v-else>
+            <el-button :id="button.id" @click="doClick(button.funcName)" type="primary" size="normal" :disabled="buttonStates[index]" :key="index">
+              {{button.label}}
+              <i v-if="button.icon" :class="button.icon+' el-icon--right'"></i>
+            </el-button>
+            <slot  name="toolBar"></slot>
+          </template>
+        </template>
       </div>
     </el-row>
     <!--列表-->
@@ -137,7 +160,7 @@ import commonUtil from '@/utils/commonUtil'
 import TempTableColumn from '@/components/Templates/TempTable/TempTableColumn'
 import TempFormColumn from "@/components/Templates/TempForm/TempFormColumn"
 import TempFormPage from "@/components/Templates/TempForm/TempFormPage"
-
+import TempAppAddDialog from "@/components/Templates/TempDialog/TempAppAddDialog"
 
 export default {
   form: {
@@ -256,7 +279,7 @@ export default {
     if (this.autoQuery) this.doPageQuery()
   },
 
-  components: {TempTableColumn,TempFormColumn,TempFormPage },
+  components: {TempTableColumn,TempFormColumn,TempFormPage,TempAppAddDialog },
   watch: {
     formData: function(){
       //alert(this.formData.rghtDsc);
@@ -329,6 +352,15 @@ export default {
 
     doCancel() {
       this.$emit("doCancel")
+    },
+
+    doDiaSave(){
+      this.$emit("doDiaSave")
+    },
+
+    doDiaCancel() {
+      console.log('1111')
+      this.$emit("doDiaCancel")
     },
 
     checkNumber(rule, value, callback) {

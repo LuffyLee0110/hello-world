@@ -5,6 +5,8 @@
     :entity="entity" 
     @hostImport="hostImport"
     @doAddApp="doAddApp" 
+    @doAddApp1="doAddApp1"
+    @doAddApp2="doAddApp2"
     @doEdit="doEdit" 
     @doDelete="doDelete"  
     @doReset="doReset"
@@ -57,7 +59,9 @@
             { id:"hostMngDelete", label: '删除', funcName: 'doDelete'}
           ],
           buttons: [
-            { id:"appNew", label: '新增', funcName: 'doAddApp', disabled: false}
+            { id:"appNew", label: '新增', isDialog: true, funcName:'doAddApp', dialogVisible: false, disabled: false},
+            { id:"appNew1", label: '新增1', funcName:'doAddApp1', disabled: false},
+            { id:"appNew2", label: '新增2', isDialog: true, funcName:'doAddApp2', dialogVisible: false, disabled: false}
           ]
         }
       }
@@ -72,7 +76,18 @@
         this.importVisible=true
       },
       doAddApp() {
-        console.log('adb')
+        this.pageDef.title = "新建应用"
+        this.pageDef.buttons[0].dialogVisible = true 
+        // this.$router.push({
+        //   name: 'AppNew',
+        //   params: {
+        //     disabled: false,
+        //     ifEdit: false
+        //   }
+        // })
+      },
+      doAddApp1(){
+        console.log('new1')
         this.$router.push({
           name: 'AppNew',
           params: {
@@ -80,6 +95,17 @@
             ifEdit: false
           }
         })
+      },
+      doAddApp2() {
+        this.pageDef.title = "新建应用"
+        this.pageDef.buttons[2].dialogVisible = true 
+        // this.$router.push({
+        //   name: 'AppNew',
+        //   params: {
+        //     disabled: false,
+        //     ifEdit: false
+        //   }
+        // })
       },
       doEdit(row) {
         this.$router.push({
