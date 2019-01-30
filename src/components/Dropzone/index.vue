@@ -7,7 +7,6 @@
 <script>
 import Dropzone from 'dropzone'
 import 'dropzone/dist/dropzone.css'
-// import { getToken } from 'api/qiniu';
 
 Dropzone.autoDiscover = false
 
@@ -27,7 +26,7 @@ export default {
     },
     defaultMsg: {
       type: String,
-      default: '上传图片'
+      default: ''
     },
     acceptedFiles: {
       type: String,

@@ -2,7 +2,13 @@
   <div class="app-container">
     <el-header>请上传Android/iOS企业版应用</el-header>
     <div class="editor-container">
-      <dropzone id="myVueDropzone" url="https://httpbin.org/post" acceptedFiles=".ipa" @dropzone-removedFile="dropzoneR" @dropzone-success="dropzoneS"/>
+      <dropzone 
+        id="myVueDropzone" 
+        url="https://httpbin.org/post" 
+        acceptedFiles=".ipa, .apk, .zip"
+        defaultMsg="上传Android/iOS企业版应用" 
+        @dropzone-removedFile="dropzoneR" 
+        @dropzone-success="dropzoneS"/>
     </div>
   </div>
 </template>
