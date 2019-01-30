@@ -1,9 +1,15 @@
 <template>
   <div class="app-container">
     <el-header>请上传Android/iOS企业版应用</el-header>
-    <div class="editor-container">
-      <dropzone id="myVueDropzone" url="https://httpbin.org/post" acceptedFiles=".ipa" @dropzone-removedFile="dropzoneR" @dropzone-success="dropzoneS"/>
-    </div>
+        <el-button class="uploadWrapper button-style-main"><i class="icon-ic_upload"></i>上传应用</el-button>
+        <input
+          alt=""
+          title="上传应用"
+          ref="referenceUpload"
+          accept=".ipa, .apk"
+          @change="referenceUpload"
+          type="file"
+          style="position: absolute;top: 0px;left: 0px;width: 144px;height: 48px;opacity: 0;cursor:pointer;">
   </div>
 </template>
 

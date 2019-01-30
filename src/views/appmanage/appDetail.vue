@@ -26,6 +26,7 @@
         importVisible: false,
         entity: {},
         formData:{},
+        dialogDef:{},
         pageDef: {
           query:{
             useForQuery:true,
@@ -59,7 +60,7 @@
             { id:"hostMngDelete", label: '删除', funcName: 'doDelete'}
           ],
           buttons: [
-            { id:"appNew", label: '新增', isDialog: true, funcName:'doAddApp', dialogVisible: false, disabled: false},
+            { id:"appNew", label: '新增', isDialog: true, funcName:'doAddApp', dialogVisible: false, disabled: false,dialogDef:'dialogDef'},
             { id:"appNew1", label: '新增1', funcName:'doAddApp1', disabled: false},
             { id:"appNew2", label: '新增2', isDialog: true, funcName:'doAddApp2', dialogVisible: false, disabled: false}
           ]

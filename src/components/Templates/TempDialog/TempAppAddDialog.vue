@@ -4,14 +4,15 @@
         :close-on-click-modal="false" center>
         <el-row>
             <div class="teamSelect">
-                <el-select clearable >
-                    <el-option >
+                <el-select v-model="team" clearable placeholder="请选择团队">
+                    <el-option v-for="item in buttonDef.dialogDef.team" 
+                        :key="item.id" :label="item.name" :value="item.id">
                 </el-option>
                 </el-select>
             </div>
         </el-row>
         <el-row>
-            <el-col :span="6">
+            <el-col :span="6" @click.native="clickAnd">
                 <el-card shadow="hover">
                     <div class="imgdiv">
                         <img src="/src/assets/icon/android1.png" alt="androidios" class="image">
@@ -21,7 +22,7 @@
                     </div>
                 </el-card>
             </el-col>
-            <el-col :span="6">
+            <el-col :span="6" @click.native="clickApp">
                 <el-card shadow="hover">
                     <div class="imgdiv">
                         <img src="/src/assets/icon/apple.png" alt="windows" class="image">
@@ -31,7 +32,7 @@
                     </div>
                 </el-card>
             </el-col>
-            <el-col :span="6">
+            <el-col :span="6" @click.native="clickWin">
                 <el-card shadow="hover">
                     <div class="imgdiv">
                         <img src="/src/assets/icon/windows1.png" alt="windows" class="image">
@@ -41,7 +42,7 @@
                     </div>
                 </el-card>
             </el-col>
-            <el-col :span="6">
+            <el-col :span="6" @click.native="clickSto">
                 <el-card shadow="hover">
                     <div class="imgdiv">
                         <img src="/src/assets/icon/iosapp.jpg" alt="iosappstore" class="image">
@@ -75,18 +76,44 @@ export default {
     },
     data() {
         return {
-            currentDate: new Date()
+            value:'1'
         };
     },
     methods: {
         doDiaCancel() {
-            console.log('2222')
-            this.$set(this.buttonDef,"dialogVisible",false);
+            this.$set(this.buttonDef,"dialogVisible",false)
             this.$emit("doDiaCancel")
         },
         doDiaSave() {
             this.$set(this.buttonDef, 'buttonDef.dialogVisible =false', false)
             this.$emit("doDiaSave", this.index, this.form);
+        },
+        clickAnd () {
+            console.log('click Android')
+            this.$set(this.buttonDef,"dialogVisible",false)
+            this.$emit("clickAnd", this.value)
+            this.$router.push({
+                name: 'AppNew',
+                params: {
+                    disabled: false,
+                    ifEdit: false
+                }
+            })
+        },
+        clickApp () {
+            console.log('click Apple Enterprise');
+            this.$set(this.buttonDef,"dialogVisible",false)
+            this.$emit("clickApp", this.value)
+        },
+        clickWin () {
+            console.log('click Windows');
+            this.$set(this.buttonDef,"dialogVisible",false)
+            this.$emit("clickWin", this.value)
+        },
+        clickSto () {
+            console.log('click App Store')
+            this.$set(this.buttonDef,"dialogVisible",false)
+            this.$emit("clickSto", this.value)
         }
 
     },
