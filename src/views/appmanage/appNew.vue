@@ -5,7 +5,7 @@
       <dropzone 
         id="myVueDropzone" 
         url="https://httpbin.org/post" 
-        acceptedFiles=".ipa, .apk, .zip"
+        acceptedFiles=".ipa, .apk, .zip, .png"
         defaultMsg="上传Android/iOS企业版应用" 
         @dropzone-removedFile="dropzoneR" 
         @dropzone-success="dropzoneS"/>
@@ -38,5 +38,7 @@ export default {
     color: #333;
     text-align: center;
     line-height: 60px;
+    width: 20rem;
+    margin: auto;
   }
 </style>

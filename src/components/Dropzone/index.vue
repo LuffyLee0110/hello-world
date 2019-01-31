@@ -50,7 +50,7 @@ export default {
     },
     maxFiles: {
       type: Number,
-      default: 3
+      default: 1
     },
     autoProcessQueue: {
       type: Boolean,
@@ -99,9 +99,19 @@ export default {
       addRemoveLinks: this.showRemoveLink,
       acceptedFiles: this.acceptedFiles,
       autoProcessQueue: this.autoProcessQueue,
-      dictDefaultMessage: '<i style="margin-top: 3em;display: inline-block" class="material-icons">' + this.defaultMsg + '</i><br>Drop files here to upload',
-      dictMaxFilesExceeded: '只能一个图',
-      previewTemplate: '<div class="dz-preview dz-file-preview">  <div class="dz-image" style="width:' + this.thumbnailWidth + 'px;height:' + this.thumbnailHeight + 'px" ><img style="width:' + this.thumbnailWidth + 'px;height:' + this.thumbnailHeight + 'px" data-dz-thumbnail /></div>  <div class="dz-details"><div class="dz-size"><span data-dz-size></span></div> <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>  <div class="dz-error-message"><span data-dz-errormessage></span></div>  <div class="dz-success-mark"> <i class="material-icons">done</i> </div>  <div class="dz-error-mark"><i class="material-icons">error</i></div></div>',
+      dictDefaultMessage: '<i style="margin-top: 3em;display: inline-block" class="material-icons">' 
+                          + this.defaultMsg + '</i><br/><br/>拖拽文件到此处上传',
+      dictMaxFilesExceeded: '每次最多上传一个文件',
+      previewTemplate: '<div class="dz-preview dz-file-preview">  <div class="dz-image" style="width:' 
+                        + this.thumbnailWidth + 'px;height:' + this.thumbnailHeight 
+                        + 'px" ><img style="width:' + this.thumbnailWidth 
+                        + 'px;height:' + this.thumbnailHeight 
+                        + 'px" data-dz-thumbnail /></div>  <div class="dz-details">'
+                        + '<div class="dz-size"><span data-dz-size></span></div> '
+                        + '<div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div> ' 
+                        + '<div class="dz-error-message"><span data-dz-errormessage></span></div> '
+                        + '<div class="dz-success-mark"> <i class="material-icons">done</i> </div> ' 
+                        + '<div class="dz-error-mark"><i class="material-icons">error</i></div></div>',
       init() {
         const val = vm.defaultImg
         if (!val) return
@@ -204,13 +214,14 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
     .dropzone {
         border: 2px solid #E5E5E5;
         font-family: 'Roboto', sans-serif;
         color: #777;
         transition: background-color .2s linear;
         padding: 5px;
+        height: 20em;
     }
 
     .dropzone:hover {
