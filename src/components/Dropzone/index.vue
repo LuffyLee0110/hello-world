@@ -7,6 +7,7 @@
 <script>
 import Dropzone from 'dropzone'
 import 'dropzone/dist/dropzone.css'
+// import { getToken } from 'api/qiniu';
 
 Dropzone.autoDiscover = false
 
@@ -26,7 +27,7 @@ export default {
     },
     defaultMsg: {
       type: String,
-      default: ''
+      default: '上传图片'
     },
     acceptedFiles: {
       type: String,
@@ -50,7 +51,7 @@ export default {
     },
     maxFiles: {
       type: Number,
-      default: 1
+      default: 3
     },
     autoProcessQueue: {
       type: Boolean,
@@ -72,7 +73,8 @@ export default {
   data() {
     return {
       dropzone: '',
-      initOnce: true
+      initOnce: true,
+      showUploadView: false
     }
   },
   watch: {
@@ -99,19 +101,9 @@ export default {
       addRemoveLinks: this.showRemoveLink,
       acceptedFiles: this.acceptedFiles,
       autoProcessQueue: this.autoProcessQueue,
-      dictDefaultMessage: '<i style="margin-top: 3em;display: inline-block" class="material-icons">' 
-                          + this.defaultMsg + '</i><br/><br/>拖拽文件到此处上传',
-      dictMaxFilesExceeded: '每次最多上传一个文件',
-      // previewTemplate: '<div class="dz-preview dz-file-preview">  <div class="dz-image" style="width:' 
-      //                   + this.thumbnailWidth + 'px;height:' + this.thumbnailHeight 
-      //                   + 'px" ><img style="width:' + this.thumbnailWidth 
-      //                   + 'px;height:' + this.thumbnailHeight 
-      //                   + 'px" data-dz-thumbnail /></div>  <div class="dz-details">'
-      //                   + '<div class="dz-size"><span data-dz-size></span></div> '
-      //                   + '<div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div> ' 
-      //                   + '<div class="dz-error-message"><span data-dz-errormessage></span></div> '
-      //                   + '<div class="dz-success-mark"> <span>✔</span></div> ' 
-      //                   + '<div class="dz-error-mark"><span>✘</span></div></div>',
+      dictDefaultMessage: '<i style="margin-top: 3em;display: inline-block" class="material-icons">' + this.defaultMsg + '</i><br>Drop files here to upload',
+      dictMaxFilesExceeded: '只能一个图',
+      previewTemplate: '<div class="dz-preview dz-file-preview">  <div class="dz-image" style="width:' + this.thumbnailWidth + 'px;height:' + this.thumbnailHeight + 'px" ><img style="width:' + this.thumbnailWidth + 'px;height:' + this.thumbnailHeight + 'px" data-dz-thumbnail /></div>  <div class="dz-details"><div class="dz-size"><span data-dz-size></span></div> <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>  <div class="dz-error-message"><span data-dz-errormessage></span></div>  <div class="dz-success-mark"> <i class="material-icons">done</i> </div>  <div class="dz-error-mark"><i class="material-icons">error</i></div></div>',
       init() {
         const val = vm.defaultImg
         if (!val) return
@@ -214,94 +206,93 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-    // .dropzone {
-    //     border: 2px solid #E5E5E5;
-    //     font-family: 'Roboto', sans-serif;
-    //     color: #777;
-    //     transition: background-color .2s linear;
-    //     padding: 5px;
-    //     // height: 20em;
-    // }
+<style scoped>
+    .dropzone {
+        border: 2px solid #E5E5E5;
+        font-family: 'Roboto', sans-serif;
+        color: #777;
+        transition: background-color .2s linear;
+        padding: 5px;
+    }
 
-    // .dropzone:hover {
-    //     background-color: #F6F6F6;
-    // }
+    .dropzone:hover {
+        background-color: #F6F6F6;
+    }
 
-    // i {
-    //     color: #CCC;
-    // }
+    i {
+        color: #CCC;
+    }
 
-    // // .dropzone .dz-image img {
-    // //     width: 100%;
-    // //     height: 100%;
-    // // }
+    .dropzone .dz-image img {
+        width: 100%;
+        height: 100%;
+    }
 
-    // .dropzone input[name='file'] {
-    //     display: none;
-    // }
+    .dropzone input[name='file'] {
+        display: none;
+    }
 
-    // // .dropzone .dz-preview .dz-image {
-    // //     border-radius: 0px;
-    // // }
+    .dropzone .dz-preview .dz-image {
+        border-radius: 0px;
+    }
 
-    // // .dropzone .dz-preview:hover .dz-image img {
-    // //     transform: none;
-    // //     -webkit-filter: none;
-    // //     width: 100%;
-    // //     height: 100%;
-    // // }
+    .dropzone .dz-preview:hover .dz-image img {
+        transform: none;
+        -webkit-filter: none;
+        width: 100%;
+        height: 100%;
+    }
 
-    // // .dropzone .dz-preview .dz-details {
-    // //     bottom: 0px;
-    // //     top: 0px;
-    // //     color: white;
-    // //     background-color: rgba(33, 150, 243, 0.8);
-    // //     transition: opacity .2s linear;
-    // //     text-align: center;
-    // // }
+    .dropzone .dz-preview .dz-details {
+        bottom: 0px;
+        top: 0px;
+        color: white;
+        background-color: rgba(33, 150, 243, 0.8);
+        transition: opacity .2s linear;
+        text-align: left;
+    }
 
-    // .dropzone .dz-preview .dz-details .dz-filename span, .dropzone .dz-preview .dz-details .dz-size span {
-    //     background-color: transparent;
-    // }
+    .dropzone .dz-preview .dz-details .dz-filename span, .dropzone .dz-preview .dz-details .dz-size span {
+        background-color: transparent;
+    }
 
-    // .dropzone .dz-preview .dz-details .dz-filename:not(:hover) span {
-    //     border: none;
-    // }
+    .dropzone .dz-preview .dz-details .dz-filename:not(:hover) span {
+        border: none;
+    }
 
-    // .dropzone .dz-preview .dz-details .dz-filename:hover span {
-    //     background-color: transparent;
-    //     border: none;
-    // }
+    .dropzone .dz-preview .dz-details .dz-filename:hover span {
+        background-color: transparent;
+        border: none;
+    }
 
-    // .dropzone .dz-preview .dz-remove {
-    //     position: absolute;
-    //     z-index: 30;
-    //     color: white;
-    //     margin-left: 15px;
-    //     padding: 10px;
-    //     top: inherit;
-    //     bottom: 15px;
-    //     border: 2px white solid;
-    //     text-decoration: none;
-    //     text-transform: uppercase;
-    //     font-size: 0.8rem;
-    //     font-weight: 800;
-    //     letter-spacing: 1.1px;
-    //     opacity: 0;
-    // }
+    .dropzone .dz-preview .dz-remove {
+        position: absolute;
+        z-index: 30;
+        color: white;
+        margin-left: 15px;
+        padding: 10px;
+        top: inherit;
+        bottom: 15px;
+        border: 2px white solid;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        font-weight: 800;
+        letter-spacing: 1.1px;
+        opacity: 0;
+    }
 
-    // .dropzone .dz-preview:hover .dz-remove {
-    //     opacity: 1;
-    // }
+    .dropzone .dz-preview:hover .dz-remove {
+        opacity: 1;
+    }
 
-    // // .dropzone .dz-preview .dz-success-mark, .dropzone .dz-preview .dz-error-mark {
-    // //     margin-left: -40px;
-    // //     margin-top: -50px;
-    // // }
+    .dropzone .dz-preview .dz-success-mark, .dropzone .dz-preview .dz-error-mark {
+        margin-left: -40px;
+        margin-top: -50px;
+    }
 
-    // .dropzone .dz-preview .dz-success-mark i, .dropzone .dz-preview .dz-error-mark i {
-    //     color: white;
-    //     font-size: 5rem;
-    // }
+    .dropzone .dz-preview .dz-success-mark i, .dropzone .dz-preview .dz-error-mark i {
+        color: white;
+        font-size: 5rem;
+    }
 </style>
