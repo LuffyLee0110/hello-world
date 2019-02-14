@@ -17,7 +17,7 @@
     id="myVueDropzone" 
     url="https://test.cdkfzx.com:21005/api/apps/5be0060eff2d9261ee8b387f/upload" 
     acceptedFiles=".ipa, .apk, .zip, .png"
-    headers='{"Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjViZTAwNjBlZmYyZDkyNjFlZThiMzg3ZiIsInVzZXJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIn0sImV4cCI6MTU1MDA1NDA0OCwiaWF0IjoxNTUwMDUwNDQ4fQ.7KtN1vYro0tQhQ5Um2-wKRDXj3ktKIssfHJbduuiHR0"}'
+    headers='{"Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjViZTAwNjBlZmYyZDkyNjFlZThiMzg3ZiIsInVzZXJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIn0sImV4cCI6MTU1MDExNTgyOSwiaWF0IjoxNTUwMTEyMjI5fQ.ldWmUsekX9ui64uQLSpqgeCsuHN5duSBkffODC8BO0c"}'
     defaultMsg="上传Android/iOS企业版应用" 
     dictMaxFilesExceeded="一个一个"
     @dropzone-removedFile="dropzoneR" 

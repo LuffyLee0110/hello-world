@@ -54,6 +54,7 @@ export default {
     appUpload: '应用上传',
     appDetail: '应用详情',
     appNew: '新增应用',
+    appNewAppstore: '新增App Store应用',
     channelMgr: '渠道管理',
     tab: 'Tab',
     form: '表单',

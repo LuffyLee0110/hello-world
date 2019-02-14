@@ -134,10 +134,6 @@ export default {
     },
 
     doReset() {
-      var a = ''
-      var a = ''
-      var a = ''
-      var a = ''
       this.$emit("doReset");
     },
 

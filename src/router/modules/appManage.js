@@ -40,6 +40,13 @@ const appManageRouter = {
       name: 'AppNew',
       meta: { title: 'appNew' },
       hidden: true
+    },
+    {
+      path: 'appNewAppstore',
+      component: () => import('@/views/appmanage/appNewAppstore'),
+      name: 'AppNewAppstore',
+      meta: { title: 'appNewAppstore' },
+      hidden: true
     }
   ]
 }

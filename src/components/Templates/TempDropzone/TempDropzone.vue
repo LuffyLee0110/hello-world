@@ -12,7 +12,7 @@
     <div class="uploadApp-wrapper" v-if="this.showUploadView">
       <div class="uploadContent">
         <img src="/src/assets/icon/loadding.gif">
-        <div style="font-size: 20px;margin-top: 30px;color: #6477F2" v-html="`正在上传中...<br/>请稍等`"></div>
+        <div style="font-size: 20px;margin-top: 30px;color: #6477F2" v-html="`正在上传中...${this.progress}<br/>请稍等`"></div>
       </div>
     </div>
   </div>
@@ -124,18 +124,18 @@ export default {
       autoProcessQueue: this.autoProcessQueue,
       dictDefaultMessage: '<i style="margin-top: 3em;display: inline-block" class="material-icons">' + this.defaultMsg + '</i><br>Drop files here to upload',
       dictMaxFilesExceeded: '最多只能传一个文件',
-      // previewTemplate: '<div class="dz-preview dz-file-preview">'  +
-      //                     '<div class="dz-image" style="width:' +  this.thumbnailWidth + 'px;height:' + this.thumbnailHeight + 'px" >' +
-      //                       '<img style="width:' + this.thumbnailWidth + 'px;height:' + this.thumbnailHeight + 'px" data-dz-thumbnail />' +
-      //                     '</div> ' +
-      //                     '<div class="dz-details">' +
-      //                       '<div class="dz-size"><span data-dz-size></span></div>'+
-      //                       '<div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>  '+
-      //                       '<div class="dz-error-message"><span data-dz-errormessage></span></div>  '+
-      //                       '<div class="dz-success-mark"> <i class="material-icons">done</i> </div>  '+
-      //                       '<div class="dz-error-mark"><i class="material-icons">error</i></div>'+
-      //                     '</div>'+
-      //                   '</div>',
+      previewTemplate: '<div class="dz-preview dz-file-preview">'  +
+                          '<div class="dz-image" style="width:' +  this.thumbnailWidth + 'px;height:' + this.thumbnailHeight + 'px" >' +
+                            '<img style="width:' + this.thumbnailWidth + 'px;height:' + this.thumbnailHeight + 'px" data-dz-thumbnail />' +
+                          '</div> ' +
+                          '<div class="dz-details">' +
+                            '<div class="dz-size"><span data-dz-size></span></div>'+
+                            '<div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>  '+
+                            '<div class="dz-error-message"><span data-dz-errormessage></span></div>  '+
+                            '<div class="dz-success-mark"> <i class="material-icons">done</i> </div>  '+
+                            '<div class="dz-error-mark"><i class="material-icons">error</i></div>'+
+                          '</div>'+
+                        '</div>',
       // default previewTemplate
       // previewTemplate: '<div class="dz-preview dz-file-preview">'+
       //                     '<div class="dz-details">'+
@@ -200,6 +200,14 @@ export default {
         if(progress===100){
           this.showUploadView = false
         }
+      },
+      totaluploadprogress: (uploadProgress,totalBytes,totalBytesSent) => {
+        var a=''
+        var b=''
+        this.progress = uploadProgress
+        if(uploadProgress===100){
+          this.showUploadView = false
+        }
       }
     })
 
@@ -227,6 +235,9 @@ export default {
     })
     this.dropzone.on('processing', (file, progress, bytesSent) => {
       vm.$emit('dropzone-processing', file, progress, bytesSent)
+    })
+    this.dropzone.on('totaluploadprogress', (uploadProgress,totalBytes,totalBytesSent) =>{
+      vm.$emit('dropzone-totaluploadprogress', uploadProgress, totalBytes, totalBytesSent)
     })
   },
   destroyed() {
@@ -265,7 +276,6 @@ export default {
         mockFile.previewElement.classList.add('dz-complete')
       }
     }
-
   }
 }
 </script>
@@ -280,6 +290,7 @@ export default {
         text-align: center;
         width: 70%;
         margin: auto;
+        height: 15em;
     }
 
     .dropzone:hover {
