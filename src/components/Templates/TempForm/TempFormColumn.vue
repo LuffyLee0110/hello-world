@@ -40,6 +40,35 @@
         </el-date-picker>
       </el-form-item>
     </template>
+    <template v-else-if="col.inputType==='uploadfile'">
+      <el-form-item :label="col.label" :span="12">
+        <el-upload
+          class="upload-demo"
+          ref="upload"
+          action="https://jsonplaceholder.typicode.com/posts/"
+          :on-preview="handlePreview"
+          :on-remove="handleRemove"
+          :file-list="fileList"
+          :auto-upload="false">
+          <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+          <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
+          <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+        </el-upload>
+      </el-form-item>
+    </template>
+    <template v-else-if="col.inputType==='uploadicon'">
+      <el-form-item :label="col.label" :prop="col.modelName" :span="12">
+        <el-upload
+          class="avatar-uploader"
+          action="https://jsonplaceholder.typicode.com/posts/"
+          :show-file-list="false"
+          :on-success="handleAvatarSuccess"
+          :before-upload="beforeAvatarUpload">
+          <img v-if="imageUrl" :src="imageUrl" class="avatar">
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload>
+      </el-form-item>
+    </template>
     <template v-else-if="col.inputType==='refType'">
       <slot :name="col.modelName"></slot>
     </template>
@@ -130,12 +159,39 @@ export default {
   }
 }
 </script>
-<style rel="stylesheet/scss" lang="scss" scoped>
-.el-autocomplete {
-  width: 100%;
-}
+<style rel="stylesheet/scss" lang="scss" >
+  .el-autocomplete {
+    width: 100%;
+  }
 
-.el-form-item {
-  margin-bottom: 10px;
-}
+  .el-form-item {
+    margin-bottom: 10px;
+  }
+
+  .avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    // width: 178px;
+    // height: 178px;
+    // line-height: 178px;
+    width: 3em;
+    height: 3em;
+    line-height: 3em;
+    text-align: center;
+  }
+  // .avatar {
+  //   width: 178px;
+  //   height: 178px;
+  //   display: block;
+  // }
 </style>

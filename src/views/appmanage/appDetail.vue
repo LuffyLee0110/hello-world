@@ -61,8 +61,6 @@
           ],
           buttons: [
             { id:"appNew", label: '新增', isDialog: true, funcName:'doAddApp', dialogVisible: false, disabled: false,dialogDef:'dialogDef'},
-            { id:"appNew1", label: '新增1', funcName:'doAddApp1', disabled: false},
-            { id:"appNew2", label: '新增2', isDialog: true, funcName:'doAddApp2', dialogVisible: false, disabled: false}
           ]
         }
       }
@@ -79,27 +77,6 @@
       doAddApp() {
         this.pageDef.title = "新建应用"
         this.pageDef.buttons[0].dialogVisible = true 
-        // this.$router.push({
-        //   name: 'AppNew',
-        //   params: {
-        //     disabled: false,
-        //     ifEdit: false
-        //   }
-        // })
-      },
-      doAddApp1(){
-        console.log('new1')
-        this.$router.push({
-          name: 'AppNew',
-          params: {
-            disabled: false,
-            ifEdit: false
-          }
-        })
-      },
-      doAddApp2() {
-        this.pageDef.title = "新建应用"
-        this.pageDef.buttons[2].dialogVisible = true 
         // this.$router.push({
         //   name: 'AppNew',
         //   params: {

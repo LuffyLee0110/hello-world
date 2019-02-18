@@ -55,6 +55,7 @@ export default {
     appDetail: '应用详情',
     appNew: '新增应用',
     appNewAppstore: '新增App Store应用',
+    appNewWin: '新增Windows应用',
     channelMgr: '渠道管理',
     tab: 'Tab',
     form: '表单',

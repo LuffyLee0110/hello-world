@@ -11,11 +11,23 @@
                 @doSave="doSave" 
                 @doCancel="doCancel"/>
         </el-row>
+  <!-- <TempDropzone
+    id="myVueDropzone" 
+    url="https://test.cdkfzx.com:21005/api/apps/5be0060eff2d9261ee8b387f/upload" 
+    acceptedFiles=".ipa, .apk, .zip, .png"
+    headers='{"Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjViZTAwNjBlZmYyZDkyNjFlZThiMzg3ZiIsInVzZXJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIn0sImV4cCI6MTU1MDExNTgyOSwiaWF0IjoxNTUwMTEyMjI5fQ.ldWmUsekX9ui64uQLSpqgeCsuHN5duSBkffODC8BO0c"}'
+    defaultMsg="上传Android/iOS企业版应用" 
+    dictMaxFilesExceeded="一个一个"
+    @dropzone-removedFile="dropzoneR" 
+    @dropzone-success="dropzoneS"
+  /> -->
     </div>
 </template>
 
 <script>
 import TempFormPage from "@/components/Templates/TempForm/TempFormPage"
+import TempDropzone from '@/components/Templates/TempDropzone/TempDropzone'
+
 export default {
     data() {
         return {
@@ -23,7 +35,7 @@ export default {
             importVisible: false,
             entity: {},
             formData:{
-                appType:'iOS应用商店版'
+                appType:'Windows版'
             },
             dialogDef:{},
             pageDef: {
@@ -31,17 +43,14 @@ export default {
                     useForQuery:false,
                     name:'newAppstore',
                     pageCols: [
-                    { label: '应用名称', inputType: 'input', modelName: 'appName',disabled:false ,span:12 },
-                    { label: '应用类型', inputType: 'select', modelName: 'appType',value:'3',disabled:true ,span:12},
+                    { label: '应用名称', inputType: 'input', modelName: 'appName',disabled:false,span:12 },
+                    { label: '应用类型', inputType: 'select', modelName: 'appType',value:'0',disabled:true ,span:12},
                     { label: '应用包名', inputType: 'input', modelName: 'bundleId',disabled:false ,span:12},
                     { label: '团队名称', inputType: 'select', modelName: 'teamName',disabled:false ,span:12},
                     { label: '应用版本号', inputType: 'input', modelName: 'verCode',disabled:false ,span:12},
-                    { label: '应用大小', inputType: 'input', modelName: 'appSize',disabled:false ,span:12},
-                    { label: '应用iTunes ID', inputType: 'input', modelName: 'appstoreId',disabled:false ,span:12}, 
-                    { label: '应用描述', inputType: 'textarea', modelName: 'creator',disabled:false ,span:24}                 ,
+                    { label: '应用描述', inputType: 'textarea', modelName: 'creator',disabled:false,span:24 },
                     { label: '应用上传', inputType: 'uploadfile', disabled:false ,span:12},
                     { label: '应用图标', inputType: 'uploadicon', disabled:false ,span:12}
-
                     ]
                 }
             }
@@ -143,9 +152,25 @@ export default {
 
     doCancel() {
       this.$emit("doCancel")
-    }     
+    },
+        dropzoneS(file) {
+      console.log(file)
+      this.$message({ message: 'Upload success', type: 'success' })
+      // this.$router.push({
+      //   name: 'AppDetail',
+      //   params: {
+      //     disabled: false,
+      //     ifEdit: false
+      //   }
+      // })
+    },
+    dropzoneR(file) {
+      console.log(file)
+      this.$message({ message: 'Delete success', type: 'success' })
+    }
     },
     components: {
+        // TempFormPage,TempDropzone
         TempFormPage
     },
 };

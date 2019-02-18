@@ -104,16 +104,37 @@ export default {
             console.log('click Apple Enterprise');
             this.$set(this.buttonDef,"dialogVisible",false)
             this.$emit("clickApp", this.value)
+            this.$router.push({
+                name: 'AppNew',
+                params: {
+                    disabled: false,
+                    ifEdit: false
+                }
+            })
         },
         clickWin () {
             console.log('click Windows');
             this.$set(this.buttonDef,"dialogVisible",false)
             this.$emit("clickWin", this.value)
+            this.$router.push({
+                name: 'AppNewWin',
+                params: {
+                    disabled: false,
+                    ifEdit: false
+                }
+            })
         },
         clickSto () {
             console.log('click App Store')
             this.$set(this.buttonDef,"dialogVisible",false)
             this.$emit("clickSto", this.value)
+            this.$router.push({
+                name: 'AppNewAppstore',
+                params: {
+                    disabled: false,
+                    ifEdit: false
+                }
+            })
         }
 
     },

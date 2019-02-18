@@ -47,6 +47,13 @@ const appManageRouter = {
       name: 'AppNewAppstore',
       meta: { title: 'appNewAppstore' },
       hidden: true
+    },
+    {
+      path: 'appNewWin',
+      component: () => import('@/views/appmanage/appNewWin'),
+      name: 'AppNewWin',
+      meta: { title: 'appNewWin' },
+      hidden: true
     }
   ]
 }
