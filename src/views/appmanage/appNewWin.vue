@@ -1,16 +1,17 @@
 <template>
     <div class="app-container ">
-        <el-row class="toolQuery">
-            <TempFormPage 
-                :pageDef="pageDef.query" 
-                :formData="formData"  
-                @doReset="doReset" 
-                @pageQuery="doPageQuery" 
-                @focus="focus" 
-                @fieldChange="fieldChange" 
-                @doSave="doSave" 
-                @doCancel="doCancel"/>
-        </el-row>
+      <TempPageHeader title="上传Windows(zip)应用"></TempPageHeader>
+      <el-row class="toolQuery">
+          <TempFormPage 
+              :pageDef="pageDef.query" 
+              :formData="formData"  
+              @doReset="doReset" 
+              @pageQuery="doPageQuery" 
+              @focus="focus" 
+              @fieldChange="fieldChange" 
+              @doSave="doSave" 
+              @doCancel="doCancel"/>
+      </el-row>
   <!-- <TempDropzone
     id="myVueDropzone" 
     url="https://test.cdkfzx.com:21005/api/apps/5be0060eff2d9261ee8b387f/upload" 
@@ -26,7 +27,7 @@
 
 <script>
 import TempFormPage from "@/components/Templates/TempForm/TempFormPage"
-import TempDropzone from '@/components/Templates/TempDropzone/TempDropzone'
+import TempPageHeader from '@/components/Templates/TempHeader/TempPageHeader'
 
 export default {
     data() {
@@ -171,13 +172,14 @@ export default {
     },
     components: {
         // TempFormPage,TempDropzone
-        TempFormPage
+        TempFormPage,TempPageHeader
     },
 };
 </script>
 
 <style scoped lang="scss">
     .toolQuery {
+        margin-top: 1em;
         border-bottom: #ebeef5 solid 1px;
     }
 </style>

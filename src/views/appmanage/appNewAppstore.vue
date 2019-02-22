@@ -1,21 +1,23 @@
 <template>
     <div class="app-container ">
-        <el-row class="toolQuery">
-            <TempFormPage 
-                :pageDef="pageDef.query" 
-                :formData="formData"  
-                @doReset="doReset" 
-                @pageQuery="doPageQuery" 
-                @focus="focus" 
-                @fieldChange="fieldChange" 
-                @doSave="doSave" 
-                @doCancel="doCancel"/>
-        </el-row>
+      <TempPageHeader title="上传iOS App Store应用"></TempPageHeader>
+      <el-row class="toolQuery">
+          <TempFormPage 
+              :pageDef="pageDef.query" 
+              :formData="formData"  
+              @doReset="doReset" 
+              @pageQuery="doPageQuery" 
+              @focus="focus" 
+              @fieldChange="fieldChange" 
+              @doSave="doSave" 
+              @doCancel="doCancel"/>
+      </el-row>
     </div>
 </template>
 
 <script>
 import TempFormPage from "@/components/Templates/TempForm/TempFormPage"
+import TempPageHeader from "@/components/Templates/TempHeader/TempPageHeader"
 export default {
     data() {
         return {
@@ -38,7 +40,7 @@ export default {
                     { label: '应用版本号', inputType: 'input', modelName: 'verCode',disabled:false ,span:12},
                     { label: '应用大小', inputType: 'input', modelName: 'appSize',disabled:false ,span:12},
                     { label: '应用iTunes ID', inputType: 'input', modelName: 'appstoreId',disabled:false ,span:12}, 
-                    { label: '应用描述', inputType: 'textarea', modelName: 'creator',disabled:false ,span:24}                 ,
+                    { label: '应用描述', inputType: 'textarea', modelName: 'creator',disabled:false ,span:24},
                     { label: '应用上传', inputType: 'uploadfile', disabled:false ,span:12},
                     { label: '应用图标', inputType: 'uploadicon', disabled:false ,span:12}
 
@@ -146,13 +148,14 @@ export default {
     }     
     },
     components: {
-        TempFormPage
-    },
+        TempFormPage,TempPageHeader
+    }
 };
 </script>
 
 <style scoped lang="scss">
-    .toolQuery {
-        border-bottom: #ebeef5 solid 1px;
-    }
+  .toolQuery {
+      margin-top: 1em;
+      border-bottom: #ebeef5 solid 1px;
+  }
 </style>

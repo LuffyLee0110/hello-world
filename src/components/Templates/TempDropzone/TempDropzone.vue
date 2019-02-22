@@ -1,6 +1,7 @@
 <template>
   <div class="app-container">
-    <el-header>请上传Android/iOS企业版应用</el-header>
+    <!-- <el-header>请上传Android/iOS企业版应用</el-header> -->
+    <TempPageHeader title="上传Android/iOS企业版应用"></TempPageHeader>
     <div class="editor-container">
       <div class="dropzone"
         :ref="id" 
@@ -22,6 +23,7 @@
 import Dropzone from 'dropzone'
 import 'dropzone/dist/dropzone.css'
 // import { getToken } from 'api/qiniu';
+import TempPageHeader from "@/components/Templates/TempHeader/TempPageHeader"
 
 Dropzone.autoDiscover = false
 
@@ -87,6 +89,9 @@ export default {
       type: String,
       default:''
     }
+  },
+  components: {
+      TempPageHeader
   },
   data() {
     return {
