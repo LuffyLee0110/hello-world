@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import TempButton from "@/components/Templates/TempButton/TempButton"
+// import TempButton from "@/components/Templates/TempButton/TempButton"
 export default {
     name: "TempAppAddDialog",
     props: {
@@ -139,7 +139,7 @@ export default {
 
     },
     components: {
-        TempButton
+        // TempButton
     },
 };
 </script>

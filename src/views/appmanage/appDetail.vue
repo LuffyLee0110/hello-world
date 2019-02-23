@@ -3,10 +3,7 @@
     :pageDef="pageDef" 
     :formData="formData" 
     :entity="entity" 
-    @hostImport="hostImport"
     @doAddApp="doAddApp" 
-    @doAddApp1="doAddApp1"
-    @doAddApp2="doAddApp2"
     @doEdit="doEdit" 
     @doDelete="doDelete"  
     @doReset="doReset"
@@ -70,10 +67,6 @@
         console.log('rest')
         this.formData={}
       },
-      importFile(){},
-      hostImport(){
-        this.importVisible=true
-      },
       doAddApp() {
         this.pageDef.title = "新建应用"
         this.pageDef.buttons[0].dialogVisible = true 
@@ -131,21 +124,6 @@
         // hostPageQuery(this.listQuery).then(response => {
         //   this.entity = response
         // })
-      },
-      customFormat1(row, column, cellValue) {
-      if (cellValue !== '' && cellValue !== undefined) {
-          let fval = ''
-          this.$emit('customFormat', row, column, cellValue, function(val) {
-            fval = val
-          })
-          return fval
-        } else {
-          // return cellValue
-          var str=""
-          str += "<span>"+cellValue.appName.name +"</span>"
-          console.log(str)
-          return str
-        }
       }
     }
   }

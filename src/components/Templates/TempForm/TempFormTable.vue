@@ -104,6 +104,17 @@
               </template>
             </el-table-column>
           </template>
+          <template v-else-if="tabCol.isSwitch">
+            <el-table-column :label="tabCol.label" :prop="tabCol.prop" :sortable="tabCol.isSort" :width="tabCol.width" header-align="center" align="center">
+              <template slot-scope="scope">
+                <el-switch
+                  v-model="scope.row[tabCol.prop]"
+                  active-text="是"
+                  inactive-text="否">
+                </el-switch>
+              </template>
+            </el-table-column>
+          </template>
           <template v-else-if="tabCol.isImgButton">
             <el-table-column :label="tabCol.label" :prop="tabCol.prop" :sortable="tabCol.isSort" :width="135" header-align="center" align="center">
               <template slot-scope="scope">
