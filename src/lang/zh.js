@@ -57,6 +57,7 @@ export default {
     appNewAppstore: '新增App Store应用',
     appNewWin: '新增Windows应用',
     channelMgr: '渠道管理',
+    vercodeMgr: '版本详情',
     tab: 'Tab',
     form: '表单',
     createArticle: '创建文章',

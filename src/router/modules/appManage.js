@@ -54,6 +54,13 @@ const appManageRouter = {
       name: 'AppNewWin',
       meta: { title: 'appNewWin' },
       hidden: true
+    },
+    {
+      path: 'vercodeMgr',
+      component: () => import('@/views/appmanage/vercodeMgr'),
+      name: 'VercodeMgr',
+      meta: { title: 'vercodeMgr' },
+      hidden: true
     }
   ]
 }
