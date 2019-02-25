@@ -1,23 +1,32 @@
 <template>
-  <TempFormTable
-    :pageDef="pageDef" 
-    :formData="formData" 
-    :entity="entity" 
-    @hostImport="hostImport"
-    @doAddApp="doAddApp" 
-    @doEdit="doEdit" 
-    @doDelete="doDelete"  
-    @doReset="doReset"
-    @pageQuery="doPageQuery"
-  ></TempFormTable>
+  <div>
+    <TempFormTable
+      :pageDef="pageDef" 
+      :formData="formData" 
+      :entity="entity" 
+      @hostImport="hostImport"
+      @doAddDialog="doAddDialog" 
+      @doEdit="doEdit" 
+      @doDelete="doDelete"  
+      @doReset="doReset"
+      @pageQuery="doPageQuery"
+    ></TempFormTable>
+    <TempCommAddDialog
+      :dPageDef="dPageDef"
+      :dFormData="dFormData"
+      @doDiaSave="doDiaSave" 
+      @doDiaCancel="doDiaCancel"
+    ></TempCommAddDialog>
+  </div>
 </template>
 
 <script>
   import TempFormTable from '@/components/Templates/TempForm/TempFormTable'
+  import TempCommAddDialog from '@/components/Templates/TempDialog/TempCommAddDialog'
   import commonUtil from '@/utils/commonUtil'
 
   export default {
-    components: { TempFormTable },
+    components: { TempFormTable,TempCommAddDialog },
     data() {
       return {
         listQuery: {},
@@ -55,9 +64,24 @@
             { id:"hostMngDelete", label: '删除', funcName: 'doDelete'}
           ],
           buttons: [
-            { id:"appNew", label: '新增', isDialog: true, funcName:'doAddApp', dialogVisible: false, disabled: false,dialogDef:'dialogDef'},
+            { id:"appNew", label: '新增', funcName:'doAddDialog', disabled: false},
           ]
-        }
+        },
+        dPageDef:{
+          query:{
+            useForQuery:false,
+            name:'appsQuery',
+            pageCols: [
+              { label: '所属团队', inputType: 'select', modelName: 'teamName',disabled:false,span:24 },
+              { label: '用户名称', inputType: 'input', modelName: 'userName',disabled:false,span:12 },
+              { label: '用户密码', inputType: 'input', modelName: 'userPass',disabled:false,span:12 },
+              { label: '手机号码', inputType: 'input', modelName: 'phoneNum',disabled:false,span:12 },
+              { label: '用户邮箱', inputType: 'input', modelName: 'email',disabled:false,span:12 }
+            ]
+          },            
+          dialogVisible:false,
+        },
+        dFormData:{}
       }
     },
     methods: {
@@ -69,9 +93,9 @@
       hostImport(){
         this.importVisible=true
       },
-      doAddApp() {
-        this.pageDef.title = "新建应用"
-        this.pageDef.buttons[0].dialogVisible = true 
+      doAddDialog() {
+        this.dPageDef.title = "新增用户"
+        this.dPageDef.dialogVisible = true
         // this.$router.push({
         //   name: 'AppNew',
         //   params: {
@@ -126,20 +150,13 @@
         //   this.entity = response
         // })
       },
-      customFormat1(row, column, cellValue) {
-      if (cellValue !== '' && cellValue !== undefined) {
-          let fval = ''
-          this.$emit('customFormat', row, column, cellValue, function(val) {
-            fval = val
-          })
-          return fval
-        } else {
-          // return cellValue
-          var str=""
-          str += "<span>"+cellValue.appName.name +"</span>"
-          console.log(str)
-          return str
-        }
+      doDiaSave(){
+        this.$emit("doDiaSave")
+      },
+
+      doDiaCancel() {
+        console.log('1111')
+        this.$emit("doDiaCancel")
       }
     }
   }
