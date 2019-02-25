@@ -8,14 +8,14 @@
                 :formData="dFormData"  
                 @focus="focus" 
                 @fieldChange="fieldChange" 
-                @doDiaSave="doDiaSave" 
-                @doDiaCancel="doDiaCancel">
+                @doSave="doDiaSave" 
+                @doCancel="doDiaCancel">
             </TempFormPage>
         </el-row>
-        <div slot="footer" class="dialog-footer" align="center">
+        <!-- <div slot="footer" class="dialog-footer" align="center">
             <TempButton @click="doDiaCancel">取 消</TempButton>
             <TempButton type="primary" @click="doDiaSave">保 存</TempButton>
-        </div>
+        </div> -->
     </el-dialog>
 </template>
 
@@ -80,8 +80,8 @@ export default {
             this.$emit("doDiaCancel")
         },
         doDiaSave() {
-            cosole.log("b！！！！！！！！！！！！！！！！！")
-            this.$set(this.dPageDef, 'dPageDef.dialogVisible=false', false)
+            console.log("b！！！！！！！！！！！！！！！！！")
+            this.$set(this.dPageDef, 'dialogVisible', false)
             this.$emit("doDiaSave", this.index, this.form);
         },
         focus(modelName, val){
@@ -93,7 +93,8 @@ export default {
 
     },
     components: {
-        TempFormPage,TempButton
+        //TempFormPage,TempButton
+        TempFormPage
     },
 };
 </script>

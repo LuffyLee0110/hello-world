@@ -67,8 +67,8 @@
             name:'appsQuery',
             pageCols: [
               { label: '团队名称', inputType: 'select', modelName: 'teamName',disabled:false,span:24 },
-              { label: '渠道名称', inputType: 'input', modelName: 'chnlName',disabled:false },
-              { label: '渠道创建人', inputType: 'input', modelName: 'creator',disabled:false }
+              { label: '渠道名称', inputType: 'input', modelName: 'chnlName',disabled:false,span:12 },
+              { label: '渠道创建人', inputType: 'input', modelName: 'creator',disabled:false,span:12 }
             ]
           },            
           dialogVisible:false,
