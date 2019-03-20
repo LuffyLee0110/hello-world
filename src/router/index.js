@@ -47,6 +47,11 @@ export const constantRouterMap = [
     ]
   },
   {
+    path: '/:id',
+    name: 'AppPreView',
+    component: resolve => require(['@/views/appManage/appPreView.vue'], resolve)
+  },
+  {
     path: '/login',
     component: () => import('@/views/login/index'),
     hidden: true
