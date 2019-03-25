@@ -47,11 +47,6 @@ export const constantRouterMap = [
     ]
   },
   {
-    path: '/:id',
-    name: 'AppPreView',
-    component: resolve => require(['@/views/appManage/appPreView.vue'], resolve)
-  },
-  {
     path: '/login',
     component: () => import('@/views/login/index'),
     hidden: true
@@ -113,7 +108,7 @@ export const constantRouterMap = [
 ]
 
 export default new Router({
-  // mode: 'history', // require service support
+  mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRouterMap
 })
@@ -353,6 +348,11 @@ export const asyncRouterMap = [
         meta: { title: 'externalLink', icon: 'link' }
       }
     ]
+  },
+  {
+    path: '/:id',
+    name: 'AppPreView',
+    component: resolve => require(['@/views/appManage/appPreView.vue'], resolve)
   },
 
   { path: '*', redirect: '/404', hidden: true }

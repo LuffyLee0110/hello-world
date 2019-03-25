@@ -3,7 +3,7 @@ import Layout from '@/views/layout/Layout'
 const appManageRouter = {
   path: '/appManage',
   component: Layout,
-  redirect: 'noredirect',
+  redirect: '/appManage/appDetail',
   name: 'appManage',
   meta: {
     title: 'appManage',
