@@ -3,17 +3,17 @@
         <el-card class="box-card">
             <div class="app-content">
                 <el-row>
-                    <el-col :span="24"><div class="grid-content bg-purple-dark">名称</div></el-col>
+                    <el-col :span="24"><div class="grid-content bg-purple-dark col-border-bottom">名称</div></el-col>
                 </el-row>
                 <el-row>
-                    <el-col :span="8"><div class="grid-content bg-purple">bundle ID</div></el-col>
-                    <el-col :span="8"><div class="grid-content bg-purple-light">过期时间</div></el-col>
-                    <el-col :span="8"><div class="grid-content bg-purple">下载地址</div></el-col>
+                    <el-col :span="8"><div class="grid-content bg-purple col-border-rb">bundle ID</div></el-col>
+                    <el-col :span="8"><div class="grid-content bg-purple-light col-border-rb">过期时间</div></el-col>
+                    <el-col :span="8"><div class="grid-content bg-purple col-border-bottom">下载地址</div></el-col>
                 </el-row>
                 <el-row>
-                    <el-col :span="8"><div class="grid-content bg-purple">App Key</div></el-col>
-                    <el-col :span="8"><div class="grid-content bg-purple-light">内测设备</div></el-col>
-                    <el-col :span="8"><div class="grid-content bg-purple">下载二维码</div></el-col>
+                    <el-col :span="8"><div class="grid-content bg-purple col-border-rb">App Key</div></el-col>
+                    <el-col :span="8"><div class="grid-content bg-purple-light col-border-rb">内测设备</div></el-col>
+                    <el-col :span="8"><div class="grid-content bg-purple col-border-bottom">下载二维码</div></el-col>
                 </el-row>
             </div>
         </el-card>
@@ -101,5 +101,12 @@ export default {
 <style scoped lang="scss">
     .box-card {
         margin: 5px 20px 5px 20px;
+    }
+    .col-border-bottom {
+        border-bottom: 1px solid #eff2f4;
+    }
+    .col-border-rb {
+        border-bottom: 1px solid #eff2f4;
+        border-right: 1px solid #eff2f4;
     }
 </style>
